@@ -13,13 +13,15 @@ The security plugin makes it possible to restrict access to certain pages. Based
 
 ## How to use it?
 
-- Define the session time for logins by using  
-  c::set('kirbysec.timeout', 30 * 60);  
-  in site/config/config.php
-  
-- Change your default template to handle access rights. For example like this:
+Define the session time for logins by using
 
-`	<?php snippet('header') ?>
+	c::set('kirbysec.timeout', 30 * 60);  
+	
+in site/config/config.php.
+  
+Change your default template to handle access rights. For example like this:
+
+	<?php snippet('header') ?>
 	<?php snippet('menu') ?>
 	<?php snippet('submenu') ?>
 
@@ -42,7 +44,7 @@ The security plugin makes it possible to restrict access to certain pages. Based
 
 	</section>
 	<?php } ?>
-	<?php snippet('footer') ?>`
+	<?php snippet('footer') ?>
 
 	
 ## Defining Security
