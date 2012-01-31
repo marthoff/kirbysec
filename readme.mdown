@@ -55,12 +55,14 @@ Change your default template to handle access rights. For example like this:
 2. Name the file by the username plus ".txt" (e.g. martin.txt)
 3. Add the following content to the file
 
+
 	Name: Martin Hoffmann
 	----
 	Rolenames: Project Manager
 	----
 	Password: 827ccb0eea8a706c4c34a16891f84e7b?
-	
+
+
 4. The new user can login with the username "martin" and the password "12345".
 
 ### On page basis
