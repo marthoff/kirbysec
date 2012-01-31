@@ -19,7 +19,7 @@ The security plugin makes it possible to restrict access to certain pages. Based
   
 - Change your default template to handle access rights. For example like this:
 
-
+`
 	<?php snippet('header') ?>
 	<?php snippet('menu') ?>
 	<?php snippet('submenu') ?>
@@ -44,7 +44,8 @@ The security plugin makes it possible to restrict access to certain pages. Based
 	</section>
 	<?php } ?>
 	<?php snippet('footer') ?>
-
+`
+	
 ## Defining Security
 
 ### Define users
