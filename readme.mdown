@@ -55,12 +55,11 @@ Change your default template to handle access rights. For example like this:
 2. Name the file by the username plus ".txt" (e.g. martin.txt)
 3. Add the following content to the file
 
-<pre><code>
-	Name: Martin Hoffmann
-	----
-	Rolenames: Project Manager
-	----
-	Password: 827ccb0eea8a706c4c34a16891f84e7b
+<pre><code>Name: Martin Hoffmann
+----
+Rolenames: Project Manager
+----
+Password: 827ccb0eea8a706c4c34a16891f84e7b
 </code></pre>
 
 
@@ -75,20 +74,20 @@ Example:
 
 - content/02-projects/projects.txt
 
-	Title: Projects
-	----
-	Text: Lorem ipsum dolor sit amet, ...
-	----
-	RequiredRoles:Project Manager
-	
+<pre><code>Title: Projects
+----
+Text: Lorem ipsum dolor sit amet, ...
+----
+RequiredRoles:Project Manager</code></pre>
+
 - content/02-projects/03-project-c/project.txt
 
-	Title: Project C
-	----
-	Text: Lorem ipsum dolor sit amet, ...
-	----
-	RequiredRoles: Super Project Admin, Project Manager C
-	
+<pre><code>Title: Project C
+----
+Text: Lorem ipsum dolor sit amet, ...
+----
+RequiredRoles: Super Project Admin, Project Manager C</code></pre>
+
 1. Users with the role "Project Manager" can see the projects page and all projects except project C.
 2. Users with the roles "Super Project Admin" AND "Project Manager" or users with roles "Project Manager C" AND "Project Manager" can see project C.
 
@@ -99,7 +98,7 @@ Example:
 You can check if the current user has the required role by using this function. If `$roles` is `NULL` the $roles of this $page are used.
 
 	Security::check_access($page, $roles = NULL);
-	
+
 ### Logout
 
 Create a logout link by calling `Security::logout_link($text = 'Logout')`
@@ -114,6 +113,6 @@ Get the current user object by calling `Security::current_user()`
 
 By calling `Security::required_roles($page)`
 
-	    
+    
 ## Author
 Martin Hoffmann
