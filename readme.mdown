@@ -1,0 +1,113 @@
+# Securtiy Plugin 1.0 Beta
+
+## What is it?
+
+The security plugin makes it possible to restrict access to certain pages. Based on a role model.
+
+## Installation 
+
+1. Put the security.php file in your site/plugins folder.
+2. Put the login_from.php file in your site/snippets folder.
+3. Put the folder profiles in site
+4. Check that .htaccess is working correctly in the profiles folder
+
+## How to use it?
+
+- Define the session time for logins by using  
+  c::set('kirbysec.timeout', 30 * 60);  
+  in site/config/config.php
+  
+- Change your default template to handle access rights. For example like this:
+
+	<?php snippet('header') ?>
+	<?php snippet('menu') ?>
+	<?php snippet('submenu') ?>
+
+	<?php 
+		$auth = Secure::check_access($page);
+		if ($auth == KIRBYSEC_LOGIN_REQUIRED) {
+			snippet('login_form');
+		} else if ($auth == KIRBYSEC_ACCESS_DENIED) {
+	?>
+		<h1>Zugriff verweigert</h1>
+	<?php
+		} else if ($auth == KIRBYSEC_ACCESS_GRANTED) {
+	?>
+	<section class="content">
+
+	  <article>
+		<h1><?php echo html($page->title()) ?></h1>
+		<?php echo kirbytext($page->text()) ?>
+	  </article>
+
+	</section>
+	<?php } ?>
+	<?php snippet('footer') ?>
+
+## Defining Security
+
+### Define users
+
+1. Create a user by adding a file (what else would you expect in kirby?) in the directory site/profiles
+2. Name the file by the username plus ".txt" (e.g. martin.txt)
+3. Add the following content to the file
+
+	Name: Martin Hoffmann
+	----
+	Rolenames: Project Manager
+	----
+	Password: 827ccb0eea8a706c4c34a16891f84e7b?
+	
+4. The new user can login with the username "martin" and the password "12345".
+
+### On page basis
+
+Add the *RequiredRoles* attribute to each page, which should have restricted access rights. The value of this attribute can be any string. 
+Access restrictions are inherited by child pages, so you need to only set them once per tree. A user needs to satisfy at least one role per page to get access.
+
+Example:
+
+- content/02-projects/projects.txt
+
+	Title: Projects
+	----
+	Text: Lorem ipsum dolor sit amet, ...
+	----
+	RequiredRoles:Project Manager
+	
+- content/02-projects/03-project-c/project.txt
+
+	Title: Project C
+	----
+	Text: Lorem ipsum dolor sit amet, ...
+	----
+	RequiredRoles: Super Project Admin, Project Manager C
+	
+1. Users with the role "Project Manager" can see the projects page and all projects except project C.
+2. Users with the roles "Super Project Admin" AND "Project Manager" or users with roles "Project Manager C" AND "Project Manager" can see project C.
+
+## API
+
+### Check Access Rights
+
+You can check if the current user has the required role by using this function. If `$roles` is `NULL` the $roles of this $page are used.
+
+	Security::check_access($page, $roles = NULL);
+	
+### Logout
+
+Create a logout link by calling `Security::logout_link($text = 'Logout')`
+
+Logout programmatically by calling `Security::logout()`
+
+### Current user object
+
+Get the current user object by calling `Security::current_user()`
+
+### Get the required roles a page
+
+By calling `Security::required_roles($page)`
+
+	    
+## Author
+Martin Hoffmann
